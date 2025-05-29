@@ -1,0 +1,65 @@
+# Core Web Framework
+Flask==3.1.0
+flask-cors==5.0.1
+
+# Computer Vision & AI
+opencv-python==4.11.0.86
+torch==2.6.0
+torchvision==0.21.0
+onnxruntime==1.16.3
+
+# Data Processing
+numpy==1.26.4
+pandas==2.2.3
+Pillow==11.1.0
+scipy==1.15.2
+scikit-image==0.22.0
+
+# Database
+mysql-connector-python==9.2.0
+
+# Utilities
+requests==2.32.3
+PyYAML==6.0.1
+python-dateutil==2.9.0.post0
+
+# Core Python dependencies
+blinker==1.9.0
+certifi==2025.1.31
+charset-normalizer==3.4.1
+click==8.1.8
+contourpy==1.2.0
+cycler==0.12.1
+filelock==3.17.0
+fonttools==4.56.0
+fsspec==2025.2.0
+idna==3.10
+imageio==2.33.0
+itsdangerous==2.2.0
+Jinja2==3.1.5
+kiwisolver==1.4.8
+lazy_loader==0.3
+MarkupSafe==3.0.2
+mpmath==1.3.0
+networkx==3.2.1
+packaging==24.2
+protobuf==5.29.3
+pyparsing==3.2.1
+pytz==2025.1
+six==1.17.0
+sympy==1.13.1
+tifffile==2023.9.26
+typing_extensions==4.12.2
+tzdata==2023.3
+urllib3==2.3.0
+Werkzeug==3.1.3
+
+# mới thêm 
+tqdm==4.66.1
+# thêm mới:
+matplotlib==3.8.0
+seaborn==0.12.2
+# thêm mới:
+PyJWT==2.8.0
+
+

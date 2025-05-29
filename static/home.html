@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản lý Sinh viên Ký túc xá</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Side - Image Section -->
+        <div class="image-section">
+            <div class="circular-pattern"></div>
+            <div class="particles"></div>
+            <div class="image-overlay"></div>
+
+            <div class="image-content">
+                <h1>Hệ Thống Quản Lý <br>Sinh Viên Ký Túc Xá</h1>
+                <p>Giải pháp toàn diện giúp quản lý hiệu quả thông tin sinh viên, phòng ở và cơ sở vật chất của ký túc
+                    xá đại học.</p>
+
+                <!-- SVG Illustration -->
+                <svg class="dorm-illustration" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Building -->
+                    <rect x="200" y="100" width="400" height="400" fill="#ffffff" stroke="#000000" stroke-width="3" />
+
+                    <!-- Roof -->
+                    <polygon points="200,100 400,20 600,100" fill="#ff7f50" stroke="#000000" stroke-width="3" />
+
+                    <!-- Door -->
+                    <rect x="350" y="400" width="100" height="100" fill="#8b4513" stroke="#000000" stroke-width="3" />
+                    <circle cx="420" cy="450" r="5" fill="#ffd700" />
+
+                    <!-- Windows -->
+                    <rect x="250" y="150" width="80" height="80" fill="#87ceeb" stroke="#000000" stroke-width="3" />
+                    <rect x="250" y="250" width="80" height="80" fill="#87ceeb" stroke="#000000" stroke-width="3" />
+                    <rect x="470" y="150" width="80" height="80" fill="#87ceeb" stroke="#000000" stroke-width="3" />
+                    <rect x="470" y="250" width="80" height="80" fill="#87ceeb" stroke="#000000" stroke-width="3" />
+
+                    <!-- Window Frames -->
+                    <line x1="290" y1="150" x2="290" y2="230" stroke="#000000" stroke-width="3" />
+                    <line x1="250" y1="190" x2="330" y2="190" stroke="#000000" stroke-width="3" />
+                    <line x1="290" y1="250" x2="290" y2="330" stroke="#000000" stroke-width="3" />
+                    <line x1="250" y1="290" x2="330" y2="290" stroke="#000000" stroke-width="3" />
+                    <line x1="510" y1="150" x2="510" y2="230" stroke="#000000" stroke-width="3" />
+                    <line x1="470" y1="190" x2="550" y2="190" stroke="#000000" stroke-width="3" />
+                    <line x1="510" y1="250" x2="510" y2="330" stroke="#000000" stroke-width="3" />
+                    <line x1="470" y1="290" x2="550" y2="290" stroke="#000000" stroke-width="3" />
+
+                    <!-- Trees -->
+                    <rect x="150" y="450" width="20" height="50" fill="#8b4513" />
+                    <circle cx="160" cy="430" r="30" fill="#228b22" />
+                    <rect x="650" y="450" width="20" height="50" fill="#8b4513" />
+                    <circle cx="660" cy="430" r="30" fill="#228b22" />
+
+                    <!-- Ground -->
+                    <rect x="0" y="500" width="800" height="100" fill="#8fbc8f" />
+
+                    <!-- Students -->
+                    <circle cx="120" cy="480" r="15" fill="#ffa07a" />
+                    <rect x="115" y="495" width="10" height="20" fill="#1e90ff" />
+                    <line x1="125" y1="500" x2="135" y2="510" stroke="#000000" stroke-width="2" />
+                    <line x1="115" y1="500" x2="105" y2="510" stroke="#000000" stroke-width="2" />
+
+                    <circle cx="700" cy="480" r="15" fill="#ffa07a" />
+                    <rect x="695" y="495" width="10" height="20" fill="#ff6347" />
+                    <line x1="705" y1="500" x2="715" y2="510" stroke="#000000" stroke-width="2" />
+                    <line x1="695" y1="500" x2="685" y2="510" stroke="#000000" stroke-width="2" />
+                </svg>
+
+
+                <div class="features-container">
+                    <div class="feature">
+                        <i class="fas fa-home"></i>
+                        <h3>Đăng ký phòng</h3>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Quản lý cơ sở</h3>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bell"></i>
+                        <h3>Thông báo</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Admin Login Form Section -->
+        <div class="form-section">
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="60" height="60" fill="#3a7bd5" rx="10" ry="10" />
+                    <rect x="35" y="30" width="30" height="40" fill="white" rx="5" ry="5" />
+                    <circle cx="50" cy="80" r="5" fill="white" />
+                </svg>
+                <div class="logo-text">DormManager</div>
+            </div>
+
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Đăng nhập Quản trị viên</h2>
+                </div>
+
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" id="username" name="username" required placeholder="Nhập tên đăng nhập">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" name="password" required placeholder="Nhập mật khẩu">
+                        <i class="fas fa-eye input-icon" id="togglePassword"></i>
+                    </div>
+
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <a href="#" class="forgot-password" id="forgotPasswordLink">Quên mật khẩu?</a>
+                    </div>
+
+                    <button type="submit" class="login-button">Đăng nhập</button>
+
+                    <div id="errorMessage" class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> Tên đăng nhập hoặc mật khẩu không chính xác!
+                    </div>
+
+                    <div id="successMessage" class="success-message">
+                        <i class="fas fa-check-circle"></i> Đăng nhập thành công! Đang chuyển hướng...
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/home.js"></script>
+</body>
+
+</html>

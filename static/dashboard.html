@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Sinh Viên Ký Túc Xá</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Hệ thống quản lý sinh viên ký túc xá</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Trang chủ</span>
+                </div>
+                <div class="menu-item" data-section="student">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Quản lý sinh viên</span>
+                </div>
+                <div class="menu-item" data-section="checkin">
+                    <i class="fas fa-door-open"></i>
+                    <span>Ghi nhận ra/vào</span>
+                </div>
+                <div class="menu-item" data-section="access-logs">
+                    <i class="fas fa-history"></i>
+                    <span>Lịch sử ra/vào</span>
+                </div>
+                <div class="menu-item training-menu" onclick="openTrainingModal()">
+                    <i class="fas fa-brain"></i>
+                    <span>Training Dữ Liệu</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='/change-password.html'">
+                    <i class="fas fa-key"></i>
+                    <span>Đổi mật khẩu</span>
+                </div>
+                <div class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="page-title">
+                    <h1 id="page-title">Trang chủ</h1>
+                </div>
+                <div class="current-time">
+                    <div class="date" id="current-date"></div>
+                    <div class="time" id="current-time"></div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="dashboard-section active" id="dashboard-section">
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="icon1">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="title">Tổng số sinh viên</div>
+                        <div class="value" id="total-students">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon2">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <div class="title">Lượt vào hôm nay</div>
+                        <div class="value" id="checkins-today">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon3">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="title">Lượt ra hôm nay</div>
+                        <div class="value" id="checkouts-today">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon4">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="title">Đang trong KTX</div>
+                        <div class="value" id="students-inside">0</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Hoạt động gần đây</h2>
+                        <button class="btn btn-primary" onclick="refreshRecentActivity()">
+                            <i class="fas fa-sync-alt"></i> Làm mới
+                        </button>
+                    </div>
+                    <div class="recent-logs" id="recent-activity">
+                        <div class="loading-message">
+                            <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Management Section -->
+            <div class="student-section" id="student-section">
+                <div class="actions-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Tìm kiếm sinh viên..." id="student-search">
+                    </div>
+                    <button class="btn btn-primary" onclick="openStudentManagement()">
+                        <i class="fas fa-plus"></i> Thêm sinh viên
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Danh sách sinh viên</h2>
+                        <div class="student-count">
+                            Tổng: <span id="student-count">0</span> sinh viên
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã SV</th>
+                                    <th>Họ tên</th>
+                                    <th>Phòng</th>
+                                    <th>Lớp</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students-tbody">
+                                <tr>
+                                    <td colspan="6" class="loading-message">
+                                        <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Check-in/Check-out Section -->
+            <div class="checkin-section" id="checkin-section">
+                <div class="recognition-container">
+                    <!-- Camera Section -->
+                    <div class="camera-section">
+                        <div class="camera-header">
+                            <h3><i class="fas fa-camera"></i> Nhận diện khuôn mặt</h3>
+                            <div class="camera-controls">
+                                <button class="btn btn-primary" id="startRecognitionBtn" onclick="startFaceRecognition()">
+                                    <i class="fas fa-play"></i> Bắt đầu nhận diện
+                                </button>
+                                <button class="btn btn-danger" id="stopRecognitionBtn" onclick="stopFaceRecognition()" style="display: none;">
+                                    <i class="fas fa-stop"></i> Dừng nhận diện
+                                </button>
+                                <button class="btn btn-success" id="restartRecognitionBtn" onclick="restartFaceRecognition()" style="display: none;">
+                                    <i class="fas fa-redo"></i> Nhận diện tiếp
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="camera-container">
+                            <video id="recognitionVideo" autoplay muted style="display: none;"></video>
+                            <canvas id="recognitionCanvas" style="display: none;"></canvas>
+                            <div class="camera-placeholder" id="cameraPlaceholder">
+                                <i class="fas fa-camera"></i>
+                                <p>Nhấn "Bắt đầu nhận diện" để mở camera</p>
+                            </div>
+                        </div>
+
+                        <!-- Access Type Selection -->
+                        <div class="access-type-selection">
+                            <label>Loại ra/vào:</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="accessType" value="1" checked>
+                                    <span class="radio-custom"></span>
+                                    <i class="fas fa-sign-in-alt"></i> Vào KTX
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="accessType" value="2">
+                                    <span class="radio-custom"></span>
+                                    <i class="fas fa-sign-out-alt"></i> Ra khỏi KTX
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Info Section -->
+                    <div class="student-info-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-user"></i> Thông tin sinh viên</h3>
+                                <div class="recognition-status" id="recognitionStatus">
+                                    <span class="status-indicator waiting">
+                                        <i class="fas fa-clock"></i> Chờ nhận diện
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="student-info-display" class="student-info-empty">
+                                <div class="empty-message">
+                                    <i class="fas fa-user-slash"></i>
+                                    <p>Chưa có thông tin sinh viên</p>
+                                    <small>Vui lòng bắt đầu nhận diện khuôn mặt</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Access Logs Section -->
+            <div class="access-logs-section" id="access-logs-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Lịch sử ra/vào ký túc xá</h2>
+                        <button class="btn btn-primary" onclick="refreshAccessLogs()">
+                            <i class="fas fa-sync-alt"></i> Làm mới
+                        </button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="access-logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Sinh viên</th>
+                                    <th>Mã SV</th>
+                                    <th>Phòng</th>
+                                    <th>Loại</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="access-logs-tbody">
+                                <tr>
+                                    <td colspan="6" class="loading-message">
+                                        <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Message -->
+    <div id="statusMessage" class="status-message"></div>
+
+    <!-- Access Success Message -->
+    <div id="accessSuccessMessage" class="access-success-message">
+        <i class="fas fa-check-circle"></i>
+        <div id="accessSuccessText">Đã ghi nhận vào KTX thành công!</div>
+    </div>
+
+    <!-- Student Modal -->
+    <div class="modal-overlay" id="studentModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modalTitle">Thêm sinh viên mới</h3>
+                <button class="modal-close" onclick="closeStudentModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="studentForm">
+                    <input type="hidden" id="studentId" name="id">
+
+                    <!-- Thông tin cơ bản -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-user"></i>
+                            Thông tin cơ bản
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="studentCode">
+                                    Mã sinh viên <span class="required-badge">Bắt buộc</span>
+                                </label>
+                                <input type="text" id="studentCode" name="student_code" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fullName">
+                                    Họ và tên <span class="required-badge">Bắt buộc</span>
+                                </label>
+                                <input type="text" id="fullName" name="full_name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="birthDate">Ngày sinh</label>
+                                <input type="date" id="birthDate" name="birth_date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Giới tính</label>
+                                <select id="gender" name="gender" class="form-control">
+                                    <option value="">Chọn giới tính</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin học tập -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-graduation-cap"></i>
+                            Thông tin học tập
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="className">Lớp</label>
+                                <input type="text" id="className" name="class_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="major">Ngành học</label>
+                                <input type="text" id="major" name="major" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin liên hệ & KTX -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-home"></i>
+                            Thông tin liên hệ & KTX
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="roomNumber">Phòng KTX</label>
+                                <input type="text" id="roomNumber" name="room_number" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại</label>
+                                <input type="tel" id="phone" name="phone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chụp ảnh khuôn mặt -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <i class="fas fa-camera"></i>
+                            Chụp ảnh khuôn mặt
+                        </div>
+                        <div class="camera-section">
+                            <div class="camera-controls">
+                                <button type="button" class="btn btn-primary" id="startCameraBtn" onclick="startCamera()">
+                                    <i class="fas fa-camera"></i> Bật camera
+                                </button>
+                                <button type="button" class="btn btn-success" id="captureBtn" onclick="captureImage()" style="display: none;">
+                                    <i class="fas fa-camera-retro"></i> Chụp ảnh
+                                </button>
+                                <button type="button" class="btn btn-danger" id="stopCameraBtn" onclick="stopCamera()" style="display: none;">
+                                    <i class="fas fa-stop"></i> Tắt camera
+                                </button>
+                            </div>
+                            <div class="camera-preview">
+                                <video id="cameraVideo" autoplay style="display: none; width: 100%; max-width: 400px; border-radius: 8px;"></video>
+                                <canvas id="captureCanvas" style="display: none;"></canvas>
+                            </div>
+                            <div class="captured-images" id="capturedImages">
+                                <!-- Ảnh đã chụp sẽ hiển thị ở đây -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeStudentModal()">
+                    <i class="fas fa-times"></i> Hủy
+                </button>
+                <button type="button" class="btn btn-primary" onclick="saveStudent()">
+                    <i class="fas fa-save"></i> Lưu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Training Modal -->
+    <div class="modal-overlay" id="trainingModal" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-brain"></i> Training Dữ Liệu Khuôn Mặt</h3>
+                <button class="modal-close" onclick="closeTrainingModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>Bạn có chắc chắn muốn bắt đầu training dữ liệu khuôn mặt?</strong></p>
+
+                    <div style="margin: 15px 0;">
+                        <h4><i class="fas fa-info-circle"></i> Quá trình training sẽ:</h4>
+                        <ul style="margin-left: 20px;">
+                            <li>Xử lý tất cả ảnh trong thư mục datasets/new_persons</li>
+                            <li>Phát hiện và trích xuất đặc trưng khuôn mặt</li>
+                            <li>Cập nhật cơ sở dữ liệu nhận diện</li>
+                            <li>Di chuyển dữ liệu đã xử lý vào thư mục backup</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin: 15px 0;">
+                        <strong><i class="fas fa-exclamation-triangle"></i> Lưu ý:</strong>
+                        <br>• Quá trình có thể mất vài phút tùy thuộc vào số lượng ảnh cần xử lý
+                        <br>• Không tắt trình duyệt trong quá trình training
+                        <br>• Hệ thống sẽ tự động cập nhật sau khi hoàn thành
+                    </div>
+                </div>
+
+                <div id="trainingStatus" style="display: none; margin: 20px 0; padding: 15px; background: #e3f2fd; border-radius: 8px; text-align: center;">
+                    <i class="fas fa-spinner fa-spin" style="color: #1976d2; font-size: 1.5em;"></i>
+                    <div style="margin-top: 10px; color: #1976d2; font-weight: 600;">
+                        <span id="trainingStatusText">Đang khởi tạo training...</span>
+                    </div>
+                    <div style="margin-top: 5px; color: #666; font-size: 0.9em;">
+                        Vui lòng chờ trong giây lát...
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelTrainingBtn" onclick="closeTrainingModal()">
+                    <i class="fas fa-times"></i> Hủy
+                </button>
+                <button type="button" class="btn btn-warning" id="confirmTrainingBtn" onclick="confirmTraining()" style="background: #ffc107; border-color: #ffc107; color: #212529; font-weight: 600;">
+                    <i class="fas fa-brain"></i> Bắt đầu Training
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
