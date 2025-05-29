@@ -1,0 +1,136 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: ktx_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: db_ktx
+      MYSQL_USER: ktx_user
+      MYSQL_PASSWORD: ktx_secure_password
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+      - ./mysql-config:/etc/mysql/conf.d
+      - ./logs/mysql:/var/log/mysql
+    networks:
+      - ktx_network
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max_connections=1000
+      --innodb_buffer_pool_size=256M
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p123456"]
+      timeout: 20s
+      retries: 10
+      start_period: 60s
+
+  face-recognition:
+    image: talinh/nhandiensvktx:v1.1
+    container_name: ktx_face_recognition
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./datasets:/app/datasets
+      - ./logs:/app/logs
+      - ./backups:/app/backups
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: db_ktx
+      DB_USER: ktx_user
+      DB_PASSWORD: ktx_secure_password
+      FLASK_ENV: development
+      FLASK_DEBUG: "true"
+      SECRET_KEY: dormitory_face_recognition_secret_2025
+      JWT_SECRET_KEY: dormitory_face_recognition_secret_2025
+      JWT_ALGORITHM: HS256
+      JWT_EXPIRY_HOURS: 24
+      PYTHONUNBUFFERED: 1
+      TZ: Asia/Ho_Chi_Minh
+      MIN_SCORE_THRESHOLD: 0.25
+      AUTO_LOG_THRESHOLD: 0.4
+      MAX_FACES_PER_FRAME: 10
+      FACE_IMAGE_WIDTH: 112
+      FACE_IMAGE_HEIGHT: 112
+      DATASETS_DIR: ./datasets
+      DATA_DIR: ./datasets/data
+      BACKUP_DIR: ./datasets/backup
+      NEW_PERSONS_DIR: ./datasets/new_persons
+      FEATURES_DIR: ./datasets/face_features
+      FEATURES_FILE: ./datasets/face_features/feature
+      UPLOADS_DIR: ./static/uploads
+      STUDENTS_PHOTOS_DIR: ./static/uploads/students
+      ACCESS_PHOTOS_DIR: ./static/uploads/access
+      LANG: vi_VN.UTF-8
+      LOG_LEVEL: INFO
+      LOG_DIR: ./logs
+      LOG_MAX_SIZE: 10MB
+      LOG_BACKUP_COUNT: 5
+      CORS_ORIGINS: http://localhost:5001,http://127.0.0.1:5001
+      AUTO_BACKUP: "true"
+      BACKUP_SCHEDULE: "0 2 * * *"
+      BACKUP_RETENTION_DAYS: 30
+      SMTP_HOST: ""
+      SMTP_PORT: 587
+      SMTP_USER: ""
+      SMTP_PASSWORD: ""
+      SMTP_FROM: noreply@dormitory.edu.vn
+      ADMIN_EMAIL: admin@dormitory.edu.vn
+      DEV_RELOAD: "true"
+      DEV_THREADED: "true"
+      DEV_PROCESSES: 1
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - ktx_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/test"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: ktx_phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "81:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: ktx_user
+      PMA_PASSWORD: ktx_secure_password
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 100M
+      MEMORY_LIMIT: 512M
+      MAX_EXECUTION_TIME: 300
+      TZ: Asia/Ho_Chi_Minh
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - ktx_network
+
+volumes:
+  mysql_data:
+    driver: local
+    name: db_ktx_mysql_data
+
+networks:
+  ktx_network:
+    driver: bridge
+    name: ktx_network
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
