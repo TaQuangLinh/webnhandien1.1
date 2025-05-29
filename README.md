@@ -12,23 +12,15 @@ Hệ thống sử dụng trí tuệ nhân tạo để nhận diện và so sánh
 
 </div>
 
-<details>
-<summary>Mục lục</summary>
+**Mục lục**
 
 - [ℹ Thông tin về dự án](#ℹ-thông-tin-về-dự-án)
   - [👨‍💻 Thành viên nhóm](#-thành-viên-nhóm)
-  - [⚙️ Các công nghệ được sử dụng](#các-công-nghệ-được-sử-dụng)
 - [⚙️ Hướng dẫn cài đặt](#-Hướng-dẫn-cài-đặt)
   - [📝 Yêu Cầu Hệ Thống](#-Yêu-cầu-hệ-thống)
   - [🐳 Khởi Động Hệ Thống Bằng Docker](#-Khởi-động-hệ-thống-bằng-docker)
   - [📖 Hướng dẫn sử dụng](#-Hướng-dẫn-sử-dụng)
   - [🔒 Bảo mật và riêng tư](#-Bảo-mật-và-riêng-tư)
-- [🖥️ Video thực hành](#️-Video-thực-hành)
-  - [Register](#register)
-  - [Identification](#Identification)
-  - [Update info](#update-info)
-  - [Delete info](#create-post)
-</details>
 
 ## Thông tin về dự án
 Việc quản lý sinh viên ra vào Ký túc xá (KTX) là một nhiệm vụ quan trọng nhằm đảm bảo an ninh và trật tự trong khuôn viên trường học. Dự án của chúng tôi sử dụng Công nghệ Nhận diện Khuôn mặt ứng dụng AI để tự động xác minh và ghi nhận danh tính của sinh viên. Hệ thống hoạt động như sau:
@@ -50,33 +42,7 @@ Dự án được thực hiện bởi các thành viên:
 ---
 
 ### Docker Hub Repository
-- Frontend: 
-- Backend:
-
-### Các công nghệ được sử dụng
-<p align="left">
-<a href="https://www.python.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/></a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/></a> 
-<a href="https://www.w3schools.com/css/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/></a> 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/></a> 
-<a href="https://flask.palletsprojects.com/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg" alt="flask" width="40" height="40"/></a> 
-<a href="https://github.com/serengil/deepface" target="_blank"><img src="https://raw.githubusercontent.com/serengil/deepface/master/icon/deepface-icon.png" alt="deepface" width="40" height="40"/></a>
-<a href="https://www.tensorflow.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tensorflow/tensorflow-original.svg" alt="tensorflow" width="40" height="40"/></a>
-<a href="https://opencv.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/opencv/opencv-original.svg" alt="opencv" width="40" height="40"/></a>
-<a href="https://nginx.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" width="40" height="40"/></a>
-<a href="https://www.php.net/" target="_blank">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/>
-</a>
-<a href="https://www.mysql.com/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="mysql" width="40" height="40"/></a>
-<a href="https://www.docker.com/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="docker" width="40" height="40"/></a> </p> <p align="right">
-<p align="right">
-</p>
-
-| Thành Phần      | Công nghệ sử dụng                                      |
-|----------------|----------------|
-| **Backend**    | Python, Flask, DeepFace, TensorFlow, OpenCV, MySQL,PHP |
-| **Frontend**   | HTML, CSS, JavaScript, Nginx |
-| **Triển khai** | Docker, Docker Compose |
+- https://hub.docker.com/r/talinh/nhandiensvktx/tags
 
 ---
 
@@ -158,21 +124,9 @@ docker-compose down
 
 💡 **Lưu ý:** Hãy đảm bảo thực hiện đầy đủ **chính sách bảo mật và quyền riêng tư** phù hợp với quy định của nhà trường và pháp luật hiện hành.
 
----
-
-### 🖥️Demo hệ thống ###
-
-**Đăng nhập hệ thống cho Admin**
-![alt text](image.png)
-
-**Nhận diện sinh viên ra/vào**
-![alt text](image-2.png)
-
-**Quản lý sinh viên**
-![alt text](image-1.png)
 
 ---
 ### 💡Notes
 - Nếu có bất kỳ thắc mắc hoặc muốn đóng góp ý tưởng, vui lòng liên hệ với nhóm phát triển qua email.
 
-[Link tài liệu thiết kế](https://www.notion.so/T-i-li-u-thi-t-k-h-th-ng-nh-n-di-n-sinh-vi-n-ra-v-o-k-t-c-x-1f695f47bee48087aff8e10d29136c4b?pvs=4)
+[Link báo cáo](https://www.notion.so/T-i-li-u-thi-t-k-h-th-ng-nh-n-di-n-sinh-vi-n-ra-v-o-k-t-c-x-1f695f47bee48087aff8e10d29136c4b?pvs=4)
