@@ -16,6 +16,7 @@ Hệ thống sử dụng trí tuệ nhân tạo để nhận diện và so sánh
 
 - [ℹ Thông tin về dự án](#ℹ-thông-tin-về-dự-án)
   - [👨‍💻 Thành viên nhóm](#-thành-viên-nhóm)
+  - [👨‍💻 Docker Hub Repository](#-Docker-Hub-Repository)
 - [⚙️ Hướng dẫn cài đặt](#-Hướng-dẫn-cài-đặt)
   - [📝 Yêu Cầu Hệ Thống](#-Yêu-cầu-hệ-thống)
   - [🐳 Khởi Động Hệ Thống Bằng Docker](#-Khởi-động-hệ-thống-bằng-docker)
@@ -25,7 +26,7 @@ Hệ thống sử dụng trí tuệ nhân tạo để nhận diện và so sánh
 ## Thông tin về dự án
 Việc quản lý sinh viên ra vào Ký túc xá (KTX) là một nhiệm vụ quan trọng nhằm đảm bảo an ninh và trật tự trong khuôn viên trường học. Dự án của chúng tôi sử dụng Công nghệ Nhận diện Khuôn mặt ứng dụng AI để tự động xác minh và ghi nhận danh tính của sinh viên. Hệ thống hoạt động như sau:
 
-- Sinh viên đăng ký tài khoản trên hệ thống và chụp ảnh chân dung của mình.
+- Sinh viên đăng ký thông tin trên hệ thống và chụp ảnh chân dung của mình.
 - Hệ thống sẽ ghi nhận sinh viên đã đăng kí thành công vào cơ sở dữ liệu.
 - Khi sinh viên xuất hiện trước camera tại cổng KTX, hệ thống sẽ so sánh khuôn mặt thu được từ webcam/video với cơ sở dữ liệu ảnh đã lưu.
 - Nếu phát hiện trùng khớp, hệ thống sẽ tự động ghi nhận và cho phép sinh viên vào/ra, đồng thời cập nhật vào nhật ký quản lý.
@@ -90,7 +91,7 @@ docker-compose down
 ### 📖Hướng dẫn sử dụng
 
 1️⃣ **Đăng Ký Sinh Viên**  
-- Sinh viên đăng ký tài khoản trên hệ thống và chụp ảnh chân dung của mình để hệ thống tạo hồ sơ nhận diện.
+- Sinh viên đăng ký thông tin trên hệ thống và chụp ảnh chân dung của mình để hệ thống tạo hồ sơ nhận diện.
 
 2️⃣ **Kích Hoạt Camera/Video Tại Cổng KTX**  
 - Hệ thống sẽ bật webcam hoặc camera IP để giám sát cổng vào/ra ký túc xá.
@@ -122,11 +123,6 @@ docker-compose down
 - Hệ thống yêu cầu sinh viên **đồng ý sử dụng dữ liệu cá nhân** trước khi đăng ký và sử dụng.
 - Mọi quyền truy cập và quản trị hệ thống đều yêu cầu xác thực và phân quyền rõ ràng để đảm bảo an toàn dữ liệu.
 
-💡 **Lưu ý:** Hãy đảm bảo thực hiện đầy đủ **chính sách bảo mật và quyền riêng tư** phù hợp với quy định của nhà trường và pháp luật hiện hành.
-
-
 ---
-### 💡Notes
-- Nếu có bất kỳ thắc mắc hoặc muốn đóng góp ý tưởng, vui lòng liên hệ với nhóm phát triển qua email.
 
 [Link báo cáo](https://www.notion.so/T-i-li-u-thi-t-k-h-th-ng-nh-n-di-n-sinh-vi-n-ra-v-o-k-t-c-x-1f695f47bee48087aff8e10d29136c4b?pvs=4)
