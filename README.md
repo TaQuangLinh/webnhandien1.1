@@ -90,8 +90,15 @@ docker-compose down
 ---
 ### 📖Hướng dẫn sử dụng
 
+**Admin đăng nhập vào hệ thống:**
+- Tài khoản: admin
+- Mật khẩu: 123
+
 1️⃣ **Đăng Ký Sinh Viên**  
 - Sinh viên đăng ký thông tin trên hệ thống và chụp ảnh chân dung của mình để hệ thống tạo hồ sơ nhận diện.
+- Sau khi đăng kí admin cần nhấn `Training dữ liệu` để giúp hệ thống có thể học dữ liệu.
+
+💡**Lưu ý:** Sau khi Training xong hãy reload lại trang để hệ thống nhận diện được chính xác.
 
 2️⃣ **Kích Hoạt Camera/Video Tại Cổng KTX**  
 - Hệ thống sẽ bật webcam hoặc camera IP để giám sát cổng vào/ra ký túc xá.
@@ -110,6 +117,13 @@ docker-compose down
   - Quản lý thông tin sinh viên (thêm, sửa, xóa).  
   - Xem lịch sử ra/vào ký túc xá.  
   - Quản lý cấu hình hệ thống.
+
+6️⃣ **Đổi Mật Khẩu Cho Admin**
+- Nhập mật khẩu mới và sau đó xác nhận mật khẩu mới.
+- Bấm đổi mật khẩu để lưu.
+
+7️⃣ **Đăng xuất**
+- Đăng xuất hệ thống khi không dùng nữa.
 
 💡 **Lưu ý:** Hệ thống yêu cầu cấp quyền truy cập camera. Vui lòng đảm bảo sinh viên đã đồng ý sử dụng.
 
