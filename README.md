@@ -98,7 +98,9 @@ docker-compose down
 - Sinh viên đăng ký thông tin trên hệ thống và chụp ảnh chân dung của mình để hệ thống tạo hồ sơ nhận diện.
 - Sau khi đăng kí admin cần nhấn `Training dữ liệu` để giúp hệ thống có thể học dữ liệu.
 
-💡**Lưu ý:** Sau khi Training xong hãy reload lại trang để hệ thống nhận diện được chính xác.
+💡**Lưu ý:** 
+- Sau khi Training xong hãy chạy lại hệ thống bằng cách bấm stop (ở phần Docker Deskop) hoặc chạy lệnh `docker-compose down` trên terminal.
+- Khởi động lại hệ thống bằng cách bấm start hoặc chạy lệnh `docker-compose up -d` trên terminal để có thể nhận diện được.
 
 2️⃣ **Kích Hoạt Camera/Video Tại Cổng KTX**  
 - Hệ thống sẽ bật webcam hoặc camera IP để giám sát cổng vào/ra ký túc xá.
