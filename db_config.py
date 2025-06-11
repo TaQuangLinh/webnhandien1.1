@@ -20,7 +20,6 @@ JWT_CONFIG = {
 FACE_RECOGNITION_CONFIG = {
     'min_score_threshold': 0.25,  # Ngưỡng điểm tối thiểu để nhận diện
     'auto_log_threshold': 0.4,    # Ngưỡng điểm để tự động ghi nhận ra vào
-    'max_faces_per_frame': 10,    # Số khuôn mặt tối đa xử lý trong 1 frame
     'face_image_size': (112, 112) # Kích thước ảnh khuôn mặt chuẩn hóa
 }
 
